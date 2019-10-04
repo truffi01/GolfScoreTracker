@@ -19,7 +19,7 @@ app.engine(
     extname: ".hbs",
     partialsDir: "views/",
     layoutsDir: "views/",
-    defaultLayout: "layout-main"
+    defaultLayout: "layout"
   })
 );
 

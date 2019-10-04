@@ -9,14 +9,15 @@ const router = express.Router();
 
 //.login Page
 router.get("/Login", (req,res) => {
-    res.send("Login Golf App Page")
+    res.render("login")
 });
 
 
 //.register new user page 
 router.get("/Register", (req,res) => {
-    res.send("Register Golf App Page")
+    res.render("register");
 });
+
 
 
 
