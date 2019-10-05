@@ -11,13 +11,13 @@ const passport = require("passport");
 require("./config/passport")(passport);
 
 const hbs = require("express-handlebars");
-const parser = require("body-parser");
 
 //setting up dB
 const dataBase = require("./dB/connection").MongoURI;
 
-mongoose.connect(dataBase, { useNewUrlParser: true }) 
-  .then(() => console.log("Mongo Connected")); 
+mongoose.connect(dataBase, { useNewUrlParser: true, useUnifiedTopology: true, }) 
+  .then(() => console.log("Mongo Connected"))
+  .catch(err => console.log(err)); 
 
 // Express Session 
 app.use(session({
@@ -41,8 +41,8 @@ app.use((req, res, next) => {
   next(); 
 }); 
 
-app.use(parser.urlencoded({ extended: false }));
-app.use(parser.json());
+app.use(express.urlencoded({ extended: false }));
+
 
 // set a port in case we deploy or use a local host. A port is a communication endpoint 
 app.set("port", process.env.PORT || 3000);

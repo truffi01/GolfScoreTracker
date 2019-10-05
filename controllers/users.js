@@ -28,49 +28,56 @@ router.get("/Register", (req,res) => {
 
 //register request 
 router.post("/register", (req,res) => {
-    console.log(req.body); 
-    const { FirstName, LastName, email, password, password2} = req.body; 
+    const { FirstName, LastName, Email, Password, Password2} = req.body; 
 
     let registererror = []
-    if (!FirstName || !LastName || !email || !password ||!password2) {
+    /*if (!FirstName || !LastName || !Email || !Password ||!Password2) {
         registererror.push({msg: "All Fields are Required"})
-    }
+        console.log("Tom"); 
+    }*/
 
     //passwords need to be the same
-    if (password !== password2){
+    if (Password !== Password2){
         registererror.push({msg: "Passwords need to be identical"});
     };
 
     //if any of these true we want to change the form
     if (registererror.length > 0) {
         res.render("register", {
-            registererror, FirstName, LastName, email,
-            password, password2
+            registererror, FirstName, LastName, Email,
+            Password, Password2
         });
     } else {
         //password is validated. Before we submit we have to make sure User doesnt exist. This returns a promise, so we do .then. If there is a user we want to render the register form and send an error 
-        User.findOne({ email: email })
+        User.findOne({ Email: Email })
         .then(user => {
             if (user) {
                 //user is in database 
                 registererror.push({ msg: "Email already exists" })
                 res.render("register", {
-                registererror, FirstName, LastName, email,
-                password, password2
+                registererror, 
+                FirstName, 
+                LastName, 
+                Email,
+                Password, 
+                Password2
                 });
             } else {
                 //if user doesnt exist we create a new one and ecript the password. Bring in bcrypt. Create a new User but have to save it. 
                 const newUser = new User({
-                    name,
-                    email, 
-                    password
+                    FirstName,
+                    LastName,
+                    Email, 
+                    Password
                 });
+
+                console.log(newUser);
                 //hash password 
-                bcrypt.genSalt(10, (err, salt) =>
+                bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(newUser.password, salt,     (err, hash) => {
                             if(err) throw err; 
                         //set password to Hash
-                            newUser.password = hash; 
+                            newUser.Password = hash; 
                         //save user 
                             newUser.save()
                             .then(user => {
@@ -78,10 +85,10 @@ router.post("/register", (req,res) => {
                                 //want to call flash message right before this
                                res.redirect("/users/login");
                             })
-                            .catch(err => console.log(err)); 
+                            .catch(err => console.log(err)) 
                         }
-                   )
-                )
+                    );
+                });
             }
         });
         
