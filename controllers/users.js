@@ -5,6 +5,8 @@ const express = require("express");
 //need to use the express router
 const router = express.Router(); 
 
+const passport = require("passport");
+
 //Bring in bcrypt
 const bcrypt = require("bcryptjs");
 
@@ -90,6 +92,22 @@ router.post("/register", (req,res) => {
 
 });
 
+
+//need to login info
+router.post("/login", (req, res, next) => {
+    passport.authenticate("local", {
+        successRedirect: "/dashboard",
+        failureRedirect: "/users/login",
+        failureFlash: true
+    })(req, res, next);
+});
+
+//logout 
+router.get("/logout", (req, res) => {
+    req.logout(); 
+    req.flash("success_msg", "You are Logged Out");
+    res.redirect("/users/login");
+});
 
 
 

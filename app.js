@@ -4,6 +4,11 @@ const app = express();
 const mongoose = require("mongoose"); 
 const flash = require("connect-flash");
 const session = require("express-session");
+const passport = require("passport");
+
+
+//passport needs to be defined in this file 
+require("./config/passport")(passport);
 
 const hbs = require("express-handlebars");
 const parser = require("body-parser");
@@ -19,7 +24,11 @@ app.use(session({
   secret: 'golf',
   resave: true,
   saveUninitialized: true,
-}))
+}));
+
+//need to put authenticate after express session middleware and between the flash 
+app.use(passport.initialize());
+app.use(passport.session());
 
 //connect flash middleware 
 app.use(flash());
@@ -28,6 +37,7 @@ app.use(flash());
 app.use((req, res, next) => {
   res.locals.succes_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
   next(); 
 }); 
 
