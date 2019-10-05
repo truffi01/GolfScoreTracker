@@ -2,6 +2,8 @@
 const express = require("express"); 
 const app = express();
 const mongoose = require("mongoose"); 
+const flash = require("connect-flash");
+const session = require("express-session");
 
 const hbs = require("express-handlebars");
 const parser = require("body-parser");
@@ -12,8 +14,24 @@ const dataBase = require("./dB/connection").MongoURI;
 mongoose.connect(dataBase, { useNewUrlParser: true }) 
   .then(() => console.log("Mongo Connected")); 
 
+// Express Session 
+app.use(session({
+  secret: 'golf',
+  resave: true,
+  saveUninitialized: true,
+}))
 
-app.use(parser.urlencoded({ extended: true }));
+//connect flash middleware 
+app.use(flash());
+
+//global variables
+app.use((req, res, next) => {
+  res.locals.succes_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  next(); 
+}); 
+
+app.use(parser.urlencoded({ extended: false }));
 app.use(parser.json());
 
 // set a port in case we deploy or use a local host. A port is a communication endpoint 
