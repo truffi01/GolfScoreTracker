@@ -70,13 +70,13 @@ router.post("/register", (req,res) => {
                     LastName,
                     Email, 
                     Password,
-                    Password2
+                    
                 });
 
                 console.log(newUser);
                 //hash password 
                 bcrypt.genSalt(10, (err, salt) => {
-                    bcrypt.hash(newUser.password, salt,     (err, hash) => {
+                    bcrypt.hash(newUser.Password, salt,     (err, hash) => {
                             if(err) throw err; 
                         //set password to Hash
                             newUser.Password = hash; 
@@ -90,7 +90,7 @@ router.post("/register", (req,res) => {
                             .catch(err => console.log(err)) 
                         }
                     );
-                });
+                })
             }
         });
         
