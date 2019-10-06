@@ -104,12 +104,14 @@ router.post("/register", (req,res) => {
 
 //need to login info
 router.post("/login", (req, res, next) => {
-    passport.authenticate("local", {
-        successRedirect: "/dashboard",
-        failureRedirect: "/users/login",
+    passport.authenticate('local', {
+        successRedirect: '/dashboard',
+        failureRedirect: '/users/login',
         failureFlash: true
-    })(req, res, next);
+    })(req, res, next)
 });
+
+
 
 //logout 
 router.get("/logout", (req, res) => {
