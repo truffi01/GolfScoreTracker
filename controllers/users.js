@@ -29,6 +29,7 @@ router.get("/Register", (req,res) => {
 //register request 
 router.post("/register", (req,res) => {
     const { FirstName, LastName, Email, Password, Password2} = req.body; 
+    
 
     let registererror = []
     /*if (!FirstName || !LastName || !Email || !Password ||!Password2) {
@@ -68,7 +69,8 @@ router.post("/register", (req,res) => {
                     FirstName,
                     LastName,
                     Email, 
-                    Password
+                    Password,
+                    Password2
                 });
 
                 console.log(newUser);
@@ -83,7 +85,7 @@ router.post("/register", (req,res) => {
                             .then(user => {
                                 req.flash("success_msg", "You are officially registered");
                                 //want to call flash message right before this
-                               res.redirect("/users/login");
+                               res.redirect("/users/login")
                             })
                             .catch(err => console.log(err)) 
                         }
