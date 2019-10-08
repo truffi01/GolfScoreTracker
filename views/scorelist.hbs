@@ -1,1 +1,19 @@
-<h1>List</h1>
+<table class="table">
+    <thread>
+        <tr>Course</tr>
+        <tr>Score</tr>
+        <th></th>
+    </thread>
+    <tbody>
+        {{#each list}}
+            <tr>
+                <td>{{this.Course}}</td>
+                <td>{{this.Scorey}}</td>
+                <td>
+                    <a><i></i> </a>
+                    <a><i></i> </a>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
