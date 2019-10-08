@@ -1,14 +1,15 @@
 //user information routes login, new user 
 
 const express = require("express"); 
-
+//Bring in bcrypt
+const bcrypt = require("bcryptjs");
 //need to use the express router
 const router = express.Router(); 
 
 const passport = require("passport");
+const LocalStrategy = require('passport-local');
 
-//Bring in bcrypt
-const bcrypt = require("bcryptjs");
+
 
 //User model. We can now call moethods on this page on User. 
 const User = require("../models/User")
@@ -16,13 +17,12 @@ const User = require("../models/User")
 //whenever we want to create a route we just do router.(method). "/login" . than in app.js have to add routes. app.use("/", )
 
 //.login Page
-router.get("/Login", (req,res) => {
-    res.render("login")
+router.get("/login", (req,res) => {
+    res.render("login");
 });
 
-
 //.register new user page 
-router.get("/Register", (req,res) => {
+router.get("/register", (req,res) => {
     res.render("register");
 });
 
@@ -103,14 +103,14 @@ router.post("/register", (req,res) => {
 
 
 //need to login info
-router.post("/login", (req, res, next) => {
+
+router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/dashboard',
         failureRedirect: '/users/login',
         failureFlash: true
-    })(req, res, next)
+    })(req, res, next);
 });
-
 
 
 //logout 
@@ -119,10 +119,6 @@ router.get("/logout", (req, res) => {
     req.flash("success_msg", "You are Logged Out");
     res.redirect("/users/login");
 });
-
-
-
-
 
 
 

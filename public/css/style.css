@@ -1,0 +1,23 @@
+.document {
+    display: grid; 
+    grid-template-rows: 1 fr 3 fr;
+    grid-template-columns: 1 fr 3fr 1fr;
+    grid-auto-rows: minmax(125px,auto);
+    justify-items: center;
+    align-items: baseline
+
+}
+
+body {
+    background-image: url(golf.jpg);
+    height: auto;
+    background-size: cover; 
+    background-repeat: no-repeat;
+}
+
+.golfball {
+    
+    width: 250px;
+    height: 100px;
+    background-size: 100%;
+}

@@ -1,38 +1,29 @@
-{{!-- {{create a form with a push method}} --}}
-
+<div class="program">
+    <div class="programinner">
 <h1>Register</h1>
-
-<div>
 <form action="/users/register" method="POST">
-
 <div class="formRegisterGroup">
     <label for="FirstName">First Name</label>
     <input type="FirstName" id="FirstName" name="FirstName" class="nameRegisterclass" placeholder="First Name"/>
 </div>
-
 <div class="formRegisterGroup">
     <label for="LastName">Last Name</label>
     <input type="LastName" id="LastName" name="LastName" class="nameRegisterclass" placeholder="Last Name"/>
 </div>
-
 <div class="formRegisterGroup">
     <label for="Email">Email</label>
     <input type="Email" id="Email" name="Email" class="nameRegisterclass" placeholder="Add Email"/>
 </div>
-
 <div class="formRegisterGroup">
     <label for="Password">Password</label>
     <input type="Password" id="Password" name="Password" class="nameRegisterclass" placeholder="Create Password"/>
 </div>
-
 <div class="formRegisterGroup">
     <label for="Password2">Confirm Password</label>
     <input type="Password2" id="Password2" name="Password2" class="nameRegisterclass" placeholder="Confirm Password"/>
 </div>
-
 <button type="submit" class="submitButtonRegister">Register</button>
 </form>
-
 <p class="accountLogin">Have An Account? <a href="/users/login">Login</a></p>
-
+</div>
 </div> 

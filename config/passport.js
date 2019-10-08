@@ -1,12 +1,11 @@
 const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose"); 
 const bcrypt = require("bcryptjs");
-
+const passport = require("passport"); 
 const User = require("../models/User");
 
-
-module.exports = function (passport) {
-    passport.use(
+module.exports = function(passport){
+passport.use(
         new LocalStrategy({ usernameField: "Email"}, (Email, Password, done) => {
             //check to see if there is a user with email 
             User.findOne({Email: Email })
@@ -16,7 +15,7 @@ module.exports = function (passport) {
                 }
                 
                 //Match the password. Need to use bcrypt in databse it is hatched they use the keyboard which is not
-                bcrypt.compare(Password, user.Password, (err, isMatch) => {
+                bcrypt.compare(Password, User.password, (err, isMatch) => {
                     if (err) throw err;
 
                     if (isMatch) {
@@ -31,15 +30,14 @@ module.exports = function (passport) {
         })
     ); 
 
-    passport.serializeUser(function(user, done) {
+    passport.serializeUser((user, done) => {
         done(null, user.id);
       });
       
-      passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
+      passport.deserializeUser((id, done) => {
+        User.findById(id, (err, user) => {
           done(err, user);
         });
       });
-}
-
+    }
 
