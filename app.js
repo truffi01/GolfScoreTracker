@@ -6,7 +6,10 @@ const session = require("express-session");
 const bodyParser = require( 'body-parser' );
 const passport = require('passport');
 var exphbs = require("express-handlebars"); 
-
+const path = require("path"); 
+  const controlerindex = require("./controllers/index")
+const controlleruser = require("./controllers/users")
+const controllerscores = require("./controllers/scores")
 const app = express();
 
 require('./config/passport')(passport); 
@@ -32,6 +35,7 @@ app.use(session({
 
 
 app.use( bodyParser.urlencoded({ extended: true }) );
+app.use(bodyParser.json()); 
 //need to put authenticate after express session middleware and between the flash 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -52,7 +56,7 @@ app.use((req, res, next) => {
 
 // set a port in case we deploy or use a local host. A port is a communication endpoint 
 app.set("port", process.env.PORT || 3000);
-
+app.set("view engine", "hbs");
 app.engine(
   ".hbs",
   hbs({
@@ -62,14 +66,20 @@ app.engine(
     defaultLayout: "layout"
   })
 );
-app.set("view engine", "hbs");
+
 
 
 //user page is all of the controllers. Each get route is /Login, /Register. it will be users/login or users/register. If you go to users/login you get login page. If you go to users/
+
+
+
+
+
 app.use(express.static("public"));
-app.use("/", require("./controllers/index"));
-app.use("/users", require("./controllers/users"));
-app.use("/scores", require("./controllers/scores.js"));
+
+app.use("/users", controlleruser);
+app.use("/scores", controllerscores);
+app.use("/", controlerindex);
 
 //run a server 
 app.listen(app.get("port"), () => {

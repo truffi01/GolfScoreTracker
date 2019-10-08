@@ -5,13 +5,13 @@ const ScoreSchema = new mongoose.Schema({
         type: String, 
         required: true
     },
-    Score : {
+    Scorey : {
         type: String, 
         required: true
     },
    
 });
 
-const Score = mongoose.model("Score", ScoreSchema);
+const Scoret = mongoose.model("Scoret", ScoreSchema);
 
-module.exports = Score; 
+module.exports = Scoret; 

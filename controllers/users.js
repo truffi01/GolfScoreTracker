@@ -29,7 +29,7 @@ router.get("/register", (req,res) => {
 //register request 
 router.post("/register", (req,res) => {
     const { FirstName, LastName, Email, Password, Password2} = req.body; 
-    
+
 
     let registererror = []
     /*if (!FirstName || !LastName || !Email || !Password ||!Password2) {

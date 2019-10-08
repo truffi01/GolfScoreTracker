@@ -11,11 +11,14 @@ router.get("/", (req,res) => {
     res.render("welcome");
 })
 
+// router.get("/scores", (req,res) => {
+//     res.render("scores", {viewTitle: "Insert Score" });
+// });
 
-router.get("/dashboard", ensureAuthenticated, (req,res) => {
-    res.render("dashboard", {
-    });
-});
+// router.post("/scores", (req,res) => {
+//     console.log("hi"); 
+// });
+
 
 
 module.exports = router 
