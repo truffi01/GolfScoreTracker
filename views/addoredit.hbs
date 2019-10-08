@@ -1,0 +1,10 @@
+<h2>Edit Score</h2>
+
+<form action="/scores/update" method="POST">
+<input type="hidden" name="_id" value="{{newScore._id}}">
+    <label> Course</label>
+    <input type="text" name="Course" placeholder="Course">
+    <label>Score</label>
+    <input type="text" name="Scorey" placeholder="Score">
+    <button type="submit"> Submit</button>
+</form>

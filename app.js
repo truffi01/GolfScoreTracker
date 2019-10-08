@@ -55,6 +55,7 @@ app.use((req, res, next) => {
 
 
 // set a port in case we deploy or use a local host. A port is a communication endpoint 
+mongoose.set('useFindAndModify', false)
 app.set("port", process.env.PORT || 3000);
 app.set("view engine", "hbs");
 app.engine(
