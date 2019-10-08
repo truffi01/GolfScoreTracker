@@ -90,4 +90,16 @@ router.get("/:id", (req, res) => {
     }); 
 });
 
+router.get("/delete/:id", (req, res) => {
+    Scorets.findByIdAndRemove(req.params.id, (err,doc) => {
+        if (!err) {
+            res.redirect("/scores/scorelist"); 
+
+        }
+        else {
+            console.log("error"); 
+        }
+    });
+});
+
 module.exports = router
