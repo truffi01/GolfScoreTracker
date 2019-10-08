@@ -21,7 +21,7 @@ router.post("/", (req,res) => {
     
     })
 });
-
+//problem with database was scorets was labeled on mongo atlas db and I need to use scorets not scoret. Mongo added an s. Always match the database with the correct capitalization on your code from atlas. 
 router.get("/scorelist", (req,res) => {
     
     Scorets.find((err, docs) => { 
