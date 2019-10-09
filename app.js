@@ -76,8 +76,8 @@ app.engine(
 
 
 
-app.use(express.static("public"));
-
+//app.use(express.static('public'));
+app.use('/', express.static( __dirname + '/public'));
 app.use("/users", controlleruser);
 app.use("/scores", controllerscores);
 app.use("/", controlerindex);
